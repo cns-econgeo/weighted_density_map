@@ -1,15 +1,8 @@
----
-title: "Notes on weighted density map development"
-output:
-  html_document:
-    keep_md: true
-author: "CSev"  
-date: "`r format(Sys.Date())`"
----
+# Notes on weighted density map development
+CSev  
+`r format(Sys.Date())`  
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## R Markdown
 
@@ -17,16 +10,25 @@ This R Markdown document is meant to show my progess and development of maps tha
 
 Because some difficulties I've previously experience with spatial data in R, I will try to use the [sf](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html) (simple features) package for all this work.
 
-```{r cars}
+
+```r
 summary(cars)
+```
+
+```
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
 ```
 
 ## Including Plots
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+![](notes_on_development_files/figure-html/pressure-1.png)<!-- -->
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

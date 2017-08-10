@@ -36,4 +36,31 @@ ohio_blockmerged <- full_join(ohio_blocks, ohio_blockpops, by = "GISJOIN")
 ohio_blockmerged$density_mi2 <- ohio_blockmerged$pop2010/ohio_blockmerged$ALAND10miles
 ohio_blockmerged<- ohio_blockmerged[-which(is.na(ohio_blockmerged$density_mi2)), ]
 
+ohio_blockmerged$popXdens <- ohio_blockmerged$pop2010 * ohio_blockmerged$density_mi2
+
+ohio_blockmerged$tractid <- as.factor(paste0(as.character(ohio_blockmerged$STATEFP10), as.character(ohio_blockmerged$COUNTYFP10), as.character(ohio_blockmerged$TRACTCE10)))
+
+ohio_trdens <- ohio_blockmerged %>% group_by(tractid) %>% summarize(sum(pop2010), sum(popXdens), sum(ALAND10miles))
+ohio_trdens$wtd_dens <- ohio_trdens$`sum(popXdens)` / ohio_trdens$`sum(pop2010)`
+
+summary(ohio_trdens)
+tail(sort(ohio_trdens$wtd_dens),5)
+
+arrange(ohio_trdens, desc(wtd_dens))
+
+ohio_trdens <- plyr::rename(ohio_trdens, c("tractid"="GEOID"))
+ohio_trfinal <- merge(ohio_tracts, ohio_trdens, by = "GEOID", all.x = TRUE, all.y = TRUE)
+
+class(ohio_trfinal)
+
+ohio_trfinal_trimmed <- ohio_trfinal[-which(ohio_trfinal$wtd_dens>100000), ]
+ohio_trfinal_trimmed$lwdens <- log(ohio_trfinal_trimmed$wtd_dens)
+
+plot(ohio_trfinal_trimmed["wtd_dens"])
+plot(ohio_trfinal_trimmed["lwdens"])
+
+col_only <- subset(ohio_trfinal_trimmed, COUNTYFP == "049")
+summary(col_only)
+plot(col_only["wtd_dens"])
+plot(col_only["lwdens"])
 

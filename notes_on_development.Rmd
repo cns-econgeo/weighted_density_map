@@ -1,0 +1,30 @@
+---
+title: "Notes on weighted density map development"
+output: html_document
+author: "CSev"  
+date: "`r format(Sys.Date())`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This R Markdown document is meant to show my progess and development of maps that show weighted density in the United States. It is as much an exercise for me to learn a different set of development tools than I have traditionally used. My experience is with Matlab and Stata, and I would like to develop similar proficiency in R. Further, I implement a workflow that includes use of [GitHub](http://www.github.com).
+
+Because some difficulties I've previously experience with spatial data in R, I will try to use the [sf](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html) (simple features) package for all this work.
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
